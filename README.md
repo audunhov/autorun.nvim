@@ -7,7 +7,8 @@ Automatically run commands on neovim save
 
 -- using lazy.nvim
 {
-'audunhov/autorun.nvim'
+    'audunhov/autorun.nvim',
+    opts = {}
 }
 
 ```
