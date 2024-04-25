@@ -37,7 +37,7 @@ function M.auto(opts)
 		group = vim.api.nvim_create_augroup("autorun", { clear = true }),
 		pattern = pattern,
 		callback = function()
-			vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { "Output:" })
+			vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, {}) -- clear buffer
 			vim.fn.jobstart(command, jobstart_opts or {})
 		end,
 	})
@@ -72,7 +72,7 @@ function M.saved(opts)
 
 	local append_fn = append_data(bufnr)
 
-	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { "Output:" })
+	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, {}) -- clear buffer
 	vim.fn.jobstart(saved_command, {
 		stdout_buffered = true,
 		on_stdout = append_fn,
