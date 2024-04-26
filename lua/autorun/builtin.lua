@@ -41,15 +41,17 @@ function M.auto(opts)
 			vim.fn.jobstart(command, jobstart_opts or {})
 		end,
 	})
+
+	print("Auto command created")
 end
 
-local saved_bufnr_input
-local saved_command
+local saved_bufnr_input = ""
+local saved_command = ""
 
 function M.saved(opts)
 	opts = opts or {}
 
-	if saved_bufnr_input == nil then
+	if saved_bufnr_input == "" then
 		saved_bufnr_input = vim.fn.input("Enter bufnr: ")
 	end
 
@@ -61,13 +63,19 @@ function M.saved(opts)
 		bufnr = tonumber(saved_bufnr_input, 10)
 	end
 
-	if saved_command == nil then
+	local changed = false
+	if saved_command == "" then
 		saved_command = vim.fn.input("Enter command: ")
+		changed = true
 	end
 
 	if saved_command == "" then
 		print("No command provided")
 		return
+	else
+		if changed then
+			print("Saved command")
+		end
 	end
 
 	local append_fn = append_data(bufnr)
@@ -81,8 +89,9 @@ function M.saved(opts)
 end
 
 function M.clear_saved()
-	saved_bufnr_input = nil
-	saved_command = nil
+	saved_bufnr_input = ""
+	saved_command = ""
+	print("Cleared saved command")
 end
 
 return M

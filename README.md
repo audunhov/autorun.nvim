@@ -17,7 +17,7 @@ Automatically run commands on neovim save
 
 ### Commands
 
-These don't have user commands associated with them (yet?). Please provide some
+All user commands are prefixed with :AutoRun
 
 #### auto
 
@@ -26,6 +26,8 @@ Asks for an optional buffer number, a pattern and command. When a file matching 
 #### saved
 
 Asks for a buffer number and a command, then runs the command and pipes stdout and stderr to the buffer
+
+If no buffer is provided, the current buffer will be used
 
 Buffer number and command is saved between each run
 
@@ -39,8 +41,8 @@ These are my keybindings. Feel free to chose other ones. You must configure thes
 
 ```lua
 local builtin = require('autorun.builtin')
-vim.keymap.set('n', '<leader>aa', builtin.auto, {})
-vim.keymap.set('n', '<leader>as', builtin.saved, {})
-vim.keymap.set('n', '<leader>ac', builtin.clear_saved, {})
+vim.keymap.set('n', '<leader>aa', builtin.auto, { desc = "[A]utoRun [A]uto"})
+vim.keymap.set('n', '<leader>as', builtin.saved, { desc = "[A]utoRun [S]aved" })
+vim.keymap.set('n', '<leader>ac', builtin.clear_saved, {desc = "[A]utoRun [C]lear"})
 
 ```
