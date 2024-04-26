@@ -37,8 +37,15 @@ function M.auto(opts)
 		group = vim.api.nvim_create_augroup("autorun", { clear = true }),
 		pattern = pattern,
 		callback = function()
-			vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, {}) -- clear buffer
-			vim.fn.jobstart(command, jobstart_opts or {})
+			if bufnr then
+				vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, {}) -- clear buffer
+			end
+
+			if jobstart_opts then
+				vim.fn.jobstart(command, jobstart_opts)
+			else
+				vim.fn.jobstart(command)
+			end
 		end,
 	})
 
